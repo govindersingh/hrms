@@ -1,0 +1,30 @@
+{
+    "name": "govindersingh/whiteboard",
+    "description": "",
+    "authors": [
+        {
+            "name": "Govinder Singh",
+            "email": "govindersingh05@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Whiteboard\\": "app/",
+            "Modules\\Whiteboard\\Database\\Factories\\": "database/factories/",
+            "Modules\\Whiteboard\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Modules\\Whiteboard\\Tests\\": "tests/"
+        }
+    }
+}

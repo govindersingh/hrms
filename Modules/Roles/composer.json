@@ -1,0 +1,30 @@
+{
+    "name": "govindersingh/roles",
+    "description": "",
+    "authors": [
+        {
+            "name": "Govinder Singh",
+            "email": "govindersingh05@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Roles\\": "app/",
+            "Modules\\Roles\\Database\\Factories\\": "database/factories/",
+            "Modules\\Roles\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Modules\\Roles\\Tests\\": "tests/"
+        }
+    }
+}
