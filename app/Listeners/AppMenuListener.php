@@ -31,16 +31,16 @@ class AppMenuListener
         $menu->add(
             Link::toRoute('dashboard', '<i class="la la-dashboard"></i> <span> ' . __('Dashboard') . '</span>')->setActive(route_is('dashboard'))
         );
-        $activeClass = route_is(["app.chat"]) ? "active" : "";
-        $menu
-            ->submenu(
-                Html::raw('<a href="#" class="' . $activeClass . '"><i class="la la-cube"></i><span> ' . __("Apps") . '</span><span class="menu-arrow"></span></a>'),
-                Menu::new()
-                    ->add(
-                        Link::toRoute('app.chat', __('Chat'))->addClass(route_is(['app.chat']) ? 'active' : '')
-                        )
-                    ->addParentClass('submenu')
-            );
+        // $activeClass = route_is(["app.chat"]) ? "active" : "";
+        // $menu
+        //     ->submenu(
+        //         Html::raw('<a href="#" class="' . $activeClass . '"><i class="la la-cube"></i><span> ' . __("Apps") . '</span><span class="menu-arrow"></span></a>'),
+        //         Menu::new()
+        //             ->add(
+        //                 Link::toRoute('app.chat', __('Chat'))->addClass(route_is(['app.chat']) ? 'active' : '')
+        //                 )
+        //             ->addParentClass('submenu')
+        //     );
        
         if(auth()->user()->canAny([
             'view-employees','view-attendances','view-departments','view-designations','view-holidays'
