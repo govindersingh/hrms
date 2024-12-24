@@ -39,6 +39,18 @@ Route::middleware(['auth'])->group(function () {
     //     Route::delete('delete-chat/{receiver}', [ChatAppController::class, 'destroy'])->name('chat.delete-conversation');
     // });
 
+    Route::get('policy', [DashboardController::class, 'policy'])->name('policy');
+    Route::get('/policy-pdf', function () {
+        $filePath = storage_path('app/legal/company-policies.pdf');
+        if (!file_exists($filePath)) {
+            abort(404);
+        }
+    
+        return response()->file($filePath, [
+            'Content-Type' => 'application/pdf',
+        ]);
+    })->name('policy.pdf');
+
     Route::resource('users', UsersController::class);
     Route::resource('employees', EmployeesController::class);
     Route::resource('clients', ClientsController::class);

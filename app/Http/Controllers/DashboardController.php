@@ -100,4 +100,8 @@ class DashboardController extends BaseController
         $this->data['recentProjects'] = $recentProjects;
         return view('pages.dashboard', $this->data);
     }
+
+    public function policy(){
+        return view('pages.policy');
+    }
 }
