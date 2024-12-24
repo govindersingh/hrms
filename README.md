@@ -199,7 +199,7 @@ php artisan serve
 - Star the repository and report any issues/bugs you encounter here in the repository.
 
 
-In order for the chap app to be working with realtime communication, you'll need to setup [Reverb](https://laravel.com/docs/11.x/reverb), Run the reverb server **php artisan reverb:start** and listen for events with **php artisan queue:listen**
+In order for the chat app to be working with realtime communication, you'll need to setup [Reverb](https://laravel.com/docs/11.x/reverb), Run the reverb server **php artisan reverb:start** and listen for events with **php artisan queue:listen**
 
 
 ##### Please note that, this project is under active development so few things might break when you update. You can report any of your issues [here](https://github.com/govindersingh/hrms/issues)
