@@ -104,5 +104,8 @@ class AppMenuListener
             Link::toRoute('assets.index', '<i class="la la-object-ungroup"></i> <span>' . __('Assets') . '</span>')->setActive(route_is('assets.index'))
         );
 
+        $menu->add(
+            Link::toRoute('policy', '<i class="las la-file-contract"></i> <span>' . __('Legal') . '</span>')->setActive(route_is('policy'))
+        );
     }
 }
