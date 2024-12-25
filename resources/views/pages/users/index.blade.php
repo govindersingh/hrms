@@ -4,7 +4,7 @@
 
 @section('page-content')
     <div class="content container-fluid">
-
+        <div>{{ __('These users will not list in employee section, This is just for upper management.') }}</div>
         <!-- Page Header -->
         <x-breadcrumb class="col">
             <x-slot name="title">{{ __('Users') }}</x-slot>

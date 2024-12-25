@@ -88,13 +88,23 @@
                     <x-form.input type="text" name="address" />
                 </div>
             </div>
-            <div class="col">
+            <div class="col-md-4">
                 <div class="input-block mb-3">
                     <label class="col-form-label">{{ __('Avatar') }}</label>
                     <x-form.input type="file" name="avatar" />
                 </div>
             </div>
-            <div class="col">
+            <div class="col-md-4">
+                <div class="input-block mb-3">
+                    <label class="col-form-label">{{ __('Role') }}</label>
+                    <select name="role" id="role" class="select">
+                        @foreach ($roles as $role)
+                            <option @if(trim(strtolower($selected_role->value)) === trim(strtolower($role->name))) selected @endif>{{ $role->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4">
                 <div class="status-toggle">
                     <x-form.label>{{ __('Status') }}</x-form.label>
                     <x-form.input type="checkbox" id="status" class="check" name="status" />

@@ -13,6 +13,7 @@ use Chatify\Facades\ChatifyMessenger;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class EmployeesController extends Controller
 {
@@ -47,9 +48,13 @@ class EmployeesController extends Controller
     {
         $departments = Department::get();
         $designations = Designation::get();
+        $roles = Role::get();
+        $selected_role = UserType::EMPLOYEE;
         return view('pages.employees.create', compact(
             'departments',
-            'designations'
+            'designations',
+            'roles',
+            'selected_role'
         ));
     }
 
@@ -73,6 +78,7 @@ class EmployeesController extends Controller
         }
         $user = User::create([
             'type' => UserType::EMPLOYEE,
+            'type_2' => $request->role,
             'firstname' => $request->firstname,
             'middlename' => $request->middlename,
             'lastname' => $request->lastname,
@@ -89,7 +95,7 @@ class EmployeesController extends Controller
             'password' => Hash::make($request->password)
         ]);
         if (!empty($user)) {
-            $user->assignRole(UserType::EMPLOYEE);
+            $user->assignRole($request->role); // UserType::EMPLOYEE
             $totalEmployees = User::where('type', UserType::EMPLOYEE)->where('is_active', true)->count();
             $empId = "EMP-" . pad_zeros(($totalEmployees + 1));
             EmployeeDetail::create([
@@ -128,10 +134,12 @@ class EmployeesController extends Controller
         $employee = User::findOrFail($userId);
         $departments = Department::get();
         $designations = Designation::get();
+        $roles = Role::get();
         return view('pages.employees.edit', compact(
             'departments',
             'designations',
-            'employee'
+            'employee',
+            'roles'
         ));
     }
 
@@ -153,6 +161,7 @@ class EmployeesController extends Controller
             $request->avatar->move(public_path('storage/users'), $imageName);
         }
         $user->update([
+            'type_2' => $request->role,
             'firstname' => $request->firstname ?? $user->firstname,
             'middlename' => $request->middlename ?? $user->middlename,
             'lastname' => $request->lastname ?? $user->lastname,
@@ -168,8 +177,9 @@ class EmployeesController extends Controller
             'password' => !empty($request->password) ? Hash::make($request->password) : $user->password
         ]);
         if (!empty($user)) {
-            if(!$user->hasRole(UserType::EMPLOYEE)){
-                $user->assignRole(UserType::EMPLOYEE);
+            $user->syncRoles([]);
+            if(!$user->hasRole($request->role)){
+                $user->assignRole($request->role);
             }
             $employeeDetails = $user->employeeDetail;
             if (!empty($employeeDetails) && empty($employeeDetails->emp_id)) {
