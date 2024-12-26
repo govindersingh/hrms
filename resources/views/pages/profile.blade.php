@@ -21,7 +21,7 @@
             </ul>
         </x-breadcrumb>
         <!-- /Page Header -->
-        <div class="card mb-0">
+        <div class="card">
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-12">
@@ -42,7 +42,7 @@
                                                 {{ __('Date Joined') }} : {{ format_date($user->created_at, ' D M Y') }}
                                             </div>
                                             <div class="staff-msg">
-                                                <a class="btn btn-custom" href="chat.html">{{ __('Send Message') }}</a>
+                                                <a class="btn btn-custom" href="slack://open">{{ __('Send Message') }}</a>
                                             </div>
                                         </div>
                                     </div>
@@ -84,6 +84,41 @@
                                     class="edit-icon" href="javascript:void(0)" data-url="{{ route('profile.edit') }}"><i class="fa-solid fa-pencil"></i>
                                 </a>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-0">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3 class="card-title">
+                            {{ __('Documents') }}
+                            <a  
+                                href="javascript:void(0)" 
+                                data-url="{{ route('documents', ['user' => $user->email]) }}"
+                                class="edit-icon" data-title="{{ __('Add your document') }}"
+                                data-ajax-modal="true" data-size="lg"
+                                data-bs-toggle="tooltip" data-bs-title="Add your document"
+                            >
+                                <i class="fa-solid fa-plus"></i>
+                            </a>
+                        </h3>
+                        <div class="list-group">
+                            @foreach ($fileData as $file)
+                                <div class="list-group-item d-flex justify-content-between align-items-center">
+                                    <span>{{ $file['name'] }}</span>
+                                    <a  href="javascript:void(0)" 
+                                        data-url="{{ route('documents.download', ['folder' => $file['folder'], 'file' => $file['name']]) }}" 
+                                        class="btn btn-outline-primary btn-sm"
+                                        data-ajax-url="true"
+                                    >
+                                        <i class="bi bi-download"></i> Download
+                                    </a>
+                                </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>

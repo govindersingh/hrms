@@ -162,3 +162,38 @@ if ($(".datetimepicker").length > 0) {
         });
     });
 }
+
+$(document).on('click', '[data-ajax-url="true"]', function () {
+    let url = $(this).data('url');
+    $.ajax({
+        url: url,
+        beforeSend: function () {
+            $("#loader-wrapper").addClass("d-block");
+        },
+        success: function (response) {
+            $("#loader-wrapper").removeClass("d-block");
+            if (response.status && response.download_url) {
+                const link = document.createElement('a');
+                link.href = response.download_url;
+                link.download = ''; // Optionally specify the filename
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+
+                // Create temporary event for delete public file.
+                const removeLink = document.createElement('a');
+                removeLink.href = "javascript:void(0)";
+                removeLink.setAttribute("data-url", response.remove_url);
+                removeLink.setAttribute("data-ajax-url", "true");
+                document.body.appendChild(removeLink);
+                removeLink.click();
+                document.body.removeChild(removeLink);
+            }
+        },
+        error: function (xhr) {                
+            $(".loader-wrapper").addClass('d-none');
+            console.log(xhr.statusText);
+            alert("something went wrong")
+        }
+    })
+});

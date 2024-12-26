@@ -20,10 +20,12 @@
             </ul>
             <x-slot name="right">
                 <div class="col-auto float-end ms-auto">
+                    @can('create-client')
                     <a href="javascript:void(0)" data-url="{{ route('clients.create') }}" class="btn add-btn"
                         data-ajax-modal="true" data-size="lg" data-title="Add Client">
                         <i class="fa-solid fa-plus"></i> {{ __('Add Client') }}
                     </a>
+                    @endcan
                     <div class="view-icons">
                         <a href="{{ route('clients.index') }}" class="grid-view btn btn-link active"><i class="fa fa-th"></i></a>
                         <a href="{{ route('clients.list') }}" class="list-view btn btn-link"><i class="fa-solid fa-bars"></i></a>
@@ -47,21 +49,27 @@
                                 <img src="{{ !empty($client->avatar) ? uploadedAsset($client->avatar,'users'): asset('images/user.jpg') }}" alt="User Image">
                             </a>
                         </div>
+                        @canany(['edit-client', 'delete-client'])
                         <div class="dropdown profile-action">
                             <a href="#" class="action-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
                             <div class="dropdown-menu dropdown-menu-right">
+                                @can('edit-client')
                                 <a class="dropdown-item" href="javascript:void(0)" data-url="{{ route('clients.edit', ['client' => \Crypt::encrypt($client->id)]) }}" data-ajax-modal="true"
                                     data-title="Edit Client" data-size="lg">
                                     <i class="fa-solid fa-pencil m-r-5"></i>
                                     {{ __('Edit') }}
                                 </a>
+                                @endcan
+                                @can('delete-client')
                                 <a class="dropdown-item deleteBtn" data-route="{{ route('clients.destroy', $client->id) }}" data-title="Delete Client"
                                     data-question="Are you sure you want to delete?" href="javascript:void(0)">
                                     <i class="fa-regular fa-trash-can m-r-5"></i>
                                     {{ __('Delete') }}
                                 </a>
+                                @endcan
                             </div>
                         </div>
+                        @endcanany
                         <h4 class="user-name m-t-10 mb-0 text-ellipsis"><a href="{{ $showRoute }}">{{ $client->fullname }}</a></h4>
                         @if (!empty($client->clientDetail) && !empty($client->clientDetail->designation))
                         <div class="small text-muted">{{ $client->clientDetail->designation->name }}</div>

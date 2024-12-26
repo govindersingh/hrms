@@ -40,7 +40,7 @@
                     <div class="col-md-6">
                         <div class="input-block mb-3">
                             <x-form.label>{{ __('Email') }}</x-form.label>
-                            <x-form.input type="email" name="email" value="{{ $user->email }}" />
+                            <x-form.input type="email" name="email" value="{{ $user->email }}" disabled/>
                         </div>
                     </div>
                 </div>

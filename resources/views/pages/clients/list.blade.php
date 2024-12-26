@@ -17,10 +17,12 @@
             </ul>
             <x-slot name="right">
                 <div class="col-auto float-end ms-auto">
+                    @can('create-client')
                     <a href="javascript:void(0)" data-url="{{ route('clients.create') }}" class="btn add-btn"
                         data-ajax-modal="true" data-size="lg" data-title="Add Client">
                         <i class="fa-solid fa-plus"></i> {{ __('Add Client') }}
                     </a>
+                    @endcan
                     <div class="view-icons">
                         <a href="{{ route('clients.index') }}" class="grid-view btn btn-link"><i class="fa fa-th"></i></a>
                         <a href="{{ route('clients.list') }}" class="list-view btn btn-link active"><i class="fa-solid fa-bars"></i></a>

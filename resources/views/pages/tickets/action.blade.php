@@ -1,3 +1,4 @@
+@canany(['edit-ticket', 'delete-ticket'])
 <x-table-action>
     @can('edit-ticket')
     <a class="dropdown-item" href="javascript:void(0)" data-url="{{ route('tickets.edit', $id) }}" data-ajax-modal="true"
@@ -13,3 +14,4 @@
     </a>
     @endcan
 </x-table-action>
+@endcanany

@@ -15,6 +15,7 @@
                     {{ __('Department') }}
                 </li>
             </ul>
+            @can('create-department')
             <x-slot name="right">
                 <div class="col-auto float-end ms-auto">
                     <a data-url="{{ route('departments.create') }}" href="javascript:void(0)" class="btn add-btn"
@@ -24,6 +25,7 @@
                     </a>
                 </div>
             </x-slot>
+            @endcan
         </x-breadcrumb>
         <!-- /Page Header -->
 
