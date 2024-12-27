@@ -11,14 +11,17 @@
         <!-- Page Header -->
         <x-breadcrumb>
             <x-slot name="title">{{ __('Welcome') }}
-                {{ !empty(auth()->user()->username) ? auth()->user()->username . ' !' : '' }}</x-slot>
-            <ul class="breadcrumb">
+                {{ !empty(auth()->user()->username) ? auth()->user()->username . ' !' : auth()->user()->firstname . ' !' }}
+            </x-slot>
+            <!-- <ul class="breadcrumb">
                 <li class="breadcrumb-item active">
                     <a href="{{ route('dashboard') }}">{{ __('Dashboard') }}</a>
                 </li>
-            </ul>
+            </ul> -->
         </x-breadcrumb>
         <!-- /Page Header -->
+
+        <x-todays-announcements />
 
         @superadmin
 

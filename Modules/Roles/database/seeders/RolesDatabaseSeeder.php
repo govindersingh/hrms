@@ -67,6 +67,7 @@ class RolesDatabaseSeeder extends Seeder
             'departments' => ['view-departments','create-department','edit-department','delete-department'],
             'designations' => ['view-designations','create-designation','edit-designation','delete-designation'],
             'holidays' => ['view-holidays','create-holiday','edit-holiday','delete-holiday'],
+            'announcement' => ['view-announcement','create-announcement','edit-announcement','delete-announcement'],
         ];
 
         $guard = 'web';
