@@ -34,6 +34,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('profile/edit', [UserProfileController::class, 'edit'])->name('profile.edit');
     Route::post('profile', [UserProfileController::class, 'update']);
 
+    Route::get('documents', [UserProfileController::class, 'documents'])->name('documents');
+    Route::post('documents/save', [UserProfileController::class, 'saveDocuments'])->name('documents.save');
+    Route::get('documents/download/{folder}/{file}', [UserProfileController::class, 'downloadDocuments'])->name('documents.download');
+    Route::get('documents/delete', [UserProfileController::class, 'deleteDocuments'])->name('documents.delete');
+
     // Route::group(['prefix' => 'apps'], function(){
     //     Route::get('chat/{contact?}', [ChatAppController::class, 'index'])->name('app.chat');
     //     Route::delete('delete-chat/{receiver}', [ChatAppController::class, 'destroy'])->name('chat.delete-conversation');

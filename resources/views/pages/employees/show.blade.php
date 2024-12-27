@@ -100,11 +100,13 @@
                       </div>
                     </div>
                   </div>
+                  @can('edit-employee')
                   <div class="pro-edit">
                     <a href="javascript:void(0)" data-url="{{ route('employees.edit', ['employee' => \Crypt::encrypt($user->id)]) }}" data-ajax-modal="true" 
                       data-title="Edit Employee" data-size="lg" data-bs-toggle="tooltip" data-bs-title="{{ __('Edit profile') }}"><i class="fa-solid fa-pencil"></i
                     ></a>
                   </div>
+                  @endcan
                 </div>
               </div>
             </div>
@@ -158,12 +160,14 @@
                   <div class="card-body">
                     <h3 class="card-title">
                       {{ __('Personal Informations') }}
+                      @can('edit-employee')
                       <a href="javascript:void(0)" data-url="{{ route('employee.personal-info', $employee->id) }}"
                         class="edit-icon" data-title="{{ __('Personal Information') }}"
                         data-ajax-modal="true" data-size="lg"
                         >
                         <i class="fa-solid fa-pencil"></i>
                       </a>
+                      @endcan
                     </h3>
                     <ul class="personal-info">
                       @if (!empty($employee->passport_no))
@@ -223,12 +227,14 @@
                   <div class="card-body">
                     <h3 class="card-title">
                       {{ __('Emergency Contact') }}
+                      @can('edit-employee')
                       <a href="javascript:void(0)" data-url="{{ route('employee.emergency-contacts', $employee->id) }}"
                           class="edit-icon" data-title="{{ __('Emergency Contacts') }}"
                           data-ajax-modal="true" data-size="lg"
                           >
                           <i class="fa-solid fa-pencil"></i>
                       </a>
+                      @endcan
                     </h3>
                     <h5 class="section-title">{{ __('Primary') }}</h5>
                     @php
@@ -284,6 +290,7 @@
                   <div class="card-body">
                     <h3 class="card-title">
                       {{ __('Education Informations') }}
+                      @can('edit-employee')
                       <a
                       href="javascript:void(0)" data-url="{{ route('employee.education', $employee->id) }}"
                         class="edit-icon" data-title="{{ __('Education Information') }}"
@@ -291,6 +298,7 @@
                         data-bs-toggle="tooltip" data-bs-title="Education"
                         ><i class="fa-solid fa-pencil"></i>
                       </a>
+                      @endcan
                     </h3>
                     <div class="experience-box">
                       <ul class="experience-list">
@@ -325,6 +333,7 @@
                   <div class="card-body">
                     <h3 class="card-title">
                       {{ __('Work Experience') }}
+                      @can('edit-employee')
                       <a
                       href="javascript:void(0)" data-url="{{ route('employee.experience', $employee->id) }}"
                           class="edit-icon" data-title="{{ __('Working Experience Information') }}"
@@ -332,6 +341,7 @@
                           data-bs-toggle="tooltip" data-bs-title="Working Experience"
                           ><i class="fa-solid fa-pencil"></i>
                       </a>
+                      @endcan
                     </h3>
                     <div class="experience-box">
                       <ul class="experience-list">
@@ -366,6 +376,7 @@
                   <div class="card-body">
                     <h3 class="card-title">
                       {{ __('Family Informations') }}
+                      @canany(['edit-employee', 'create-employee'])
                       <a href="javascript:void(0)" data-url="{{ route('family-information.create', ['user' => $user->id]) }}"
                           class="edit-icon" data-title="{{ __('Add Family Information') }}"
                           data-ajax-modal="true" data-size="lg"
@@ -373,6 +384,7 @@
                           >
                           <i class="fa-solid fa-plus"></i>
                       </a>
+                      @endcanany
                     </h3>
                     <div class="table-responsive">
                       <table class="table table-nowrap">
@@ -400,17 +412,21 @@
                                   <td>{{ format_date($member->dob) }}</td>
                                   <td>{{ $member->phone }}</td>
                                   <x-table-action>
+                                    @can('edit-employee')
                                       <a class="dropdown-item" href="javascript:void(0)" data-url="javascript:void(0)" data-url="{{ route('family-information.edit', $member->id) }}" data-ajax-modal="true" 
                                           data-title="{{ __('Edit Family Member') }}" data-size="lg" data-bs-toggle="tooltip" data-bs-title="{{ __("Edit Family Member Information") }}">
                                           <i class="fa-solid fa-pencil m-r-5"></i>
                                           {{ __('Edit') }}
                                       </a>
+                                    @endcan
+                                    @can('delete-employee')
                                       <a class="dropdown-item deleteBtn" data-route="{{ route('family-information.destroy', $member->id) }}"
                                           data-title="{{ __('Delete User') }}" data-bs-toggle="tooltip" data-bs-title="{{ __('Delete Family Member') }}" data-question="{{ __('Are you sure you want to delete?') }}"
                                           href="javascript:void(0)" data-bs-toggle="tootip" data-bs-title="{{ __('Delete Family Member') }}">
                                           <i class="fa-regular fa-trash-can m-r-5"></i>
                                           {{ __('Delete') }}
                                       </a>
+                                    @endcan
                                   </x-table-action>
 
                                 </tr>
@@ -418,6 +434,32 @@
                           @endif
                         </tbody>
                       </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <div class="card">
+                  <div class="card-body">
+                    <h3 class="card-title">
+                        {{ __('Documents') }}
+                    </h3>
+                    <div class="list-group">
+                      @foreach ($fileData as $file)
+                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                            <span>{{ $file['name'] }}</span>
+                            <a href="javascript:void(0)" 
+                              data-url="{{ route('documents.download', ['folder' => $file['folder'], 'file' => $file['name']]) }}" 
+                              class="btn btn-outline-primary btn-sm"
+                              data-ajax-url="true"
+                            >
+                                <i class="bi bi-download"></i> Download
+                            </a>
+                        </div>
+                      @endforeach
                     </div>
                   </div>
                 </div>

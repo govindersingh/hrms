@@ -20,9 +20,16 @@
         </x-breadcrumb>
         <!-- /Page Header -->
         <div class="row">
+            @if(auth()->user()->type->name !== 'CLIENT')
             <div class="col-md-12">
                 <iframe src="{{ route('policy.pdf') }}" width="100%" height="800px" style="border: none;"></iframe>
             </div>
+            @endif
+            @if(auth()->user()->type->name == 'CLIENT')
+            <div class="col-md-12">
+                {{ __('No policies for Client.')}}
+            </div>
+            @endif
         </div>
 
     </div>

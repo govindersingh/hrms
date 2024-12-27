@@ -20,10 +20,12 @@
             </ul>
             <x-slot name="right">
                 <div class="col-auto float-end ms-auto">
+                    @can('create-employee')
                     <a href="javascript:void(0)" data-url="{{ route('employees.create') }}" class="btn add-btn"
                         data-ajax-modal="true" data-size="lg" data-title="Add Employee">
                         <i class="fa-solid fa-plus"></i> {{ __('Add Employee') }}
                     </a>
+                    @endcan
                     <div class="view-icons">
                         <a href="{{ route('employees.index') }}" class="grid-view btn btn-link active"><i class="fa fa-th"></i></a>
                         <a href="{{ route('employees.list') }}" class="list-view btn btn-link"><i class="fa-solid fa-bars"></i></a>
@@ -42,21 +44,27 @@
                         <div class="profile-img">
                             <a href="{{ route('employees.show', ['employee' => \Crypt::encrypt($employee->id)]) }}" class="avatar"><img src="{{ !empty($employee->avatar) ? uploadedAsset($employee->avatar,'users'): asset('images/user.jpg') }}" alt="User Image"></a>
                         </div>
+                        @canany(['edit-employee', 'delete-employee'])
                         <div class="dropdown profile-action">
                             <a href="#" class="action-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
                             <div class="dropdown-menu dropdown-menu-right">
+                                @can('edit-employee')
                                 <a class="dropdown-item" href="javascript:void(0)" data-url="{{ route('employees.edit', ['employee' => \Crypt::encrypt($employee->id)]) }}" data-ajax-modal="true"
                                     data-title="Edit Employee" data-size="lg">
                                     <i class="fa-solid fa-pencil m-r-5"></i>
                                     {{ __('Edit') }}
                                 </a>
+                                @endcan
+                                @can('delete-employee')
                                 <a class="dropdown-item deleteBtn" data-route="{{ route('employees.destroy', $employee->id) }}" data-title="Delete Employee"
                                     data-question="Are you sure you want to delete?" href="javascript:void(0)">
                                     <i class="fa-regular fa-trash-can m-r-5"></i>
                                     {{ __('Delete') }}
                                 </a>
+                                @endcan
                             </div>
                         </div>
+                        @endcanany
                         <h4 class="user-name m-t-10 mb-0 text-ellipsis"><a href="{{ route('employees.show', ['employee' => \Crypt::encrypt($employee->id)]) }}">{{ $employee->fullname }}</a></h4>
                         @if (!empty($employee->employeeDetail) && !empty($employee->employeeDetail->designation))
                         <div class="small text-muted">{{ $employee->employeeDetail->designation->name }}</div>

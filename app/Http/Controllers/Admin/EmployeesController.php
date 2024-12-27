@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Storage;
 
 class EmployeesController extends Controller
 {
@@ -118,10 +119,21 @@ class EmployeesController extends Controller
         $user = User::findOrFail($id);
         $employee = $user->employeeDetail;
         $pageTitle = __('Employee Profile');
+        $files = Storage::files("documents/$user->email");
+        $fileData = [];
+        foreach ($files as $file) {
+            $fileName = basename($file);
+            $folder = $user->email;
+            $fileData[] = [
+                'name' => $fileName,
+                'folder' => $folder,
+            ];
+        }
         return view('pages.employees.show', compact(
             'employee',
             'user',
-            'pageTitle'
+            'pageTitle',
+            'fileData'
         ));
     }
 

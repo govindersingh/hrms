@@ -16,6 +16,7 @@
                     {{ __('Tickets') }}
                 </li>
             </ul>
+            @can('create-ticket')
             <x-slot name="right">
                 <div class="col-auto float-end ms-auto">
                     <a href="javascript:void(0)" data-url="{{ route('tickets.create') }}" class="btn add-btn" data-ajax-modal="true"
@@ -24,6 +25,7 @@
                     </a>
                 </div>
             </x-slot>
+            @endcan
         </x-breadcrumb>
         <!-- /Page Header -->
         

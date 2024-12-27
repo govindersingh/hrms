@@ -43,11 +43,13 @@
             <div class="tab-pane show active" id="tab_additions">
             
                 <!-- Add Addition Button -->
+                 @can('create-PayrollAllowance')
                 <div class="text-end mb-4 clearfix">
                     <button class="btn btn-primary add-btn" type="button" 
                     data-ajax-modal="true" data-url="{{ route('allowances.create') }}"
                     data-size="md" data-title="{{ __('Add Allowance') }}"><i class="fa-solid fa-plus"></i> {{ __('Add Allowance') }}</button>
                 </div>
+                @endcan
                 <!-- /Add Addition Button -->
 
                 <!-- Payroll Additions Table -->
@@ -85,11 +87,13 @@
             <div class="tab-pane" id="tab_deductions">
             
                 <!-- Add Deductions Button -->
+                 @can('create-PayrollDeduction')
                 <div class="text-end mb-4 clearfix">
                     <button class="btn btn-primary add-btn" type="button" 
                     data-ajax-modal="true" data-url="{{ route('deductions.create') }}"
                     data-size="md" data-title="{{ __('Add Deduction') }}"><i class="fa-solid fa-plus"></i> {{ __('Add Deduction') }}</button>
                 </div>
+                @endcan
                 <!-- /Add Deductions Button -->
 
                 <!-- Payroll Deduction Table -->

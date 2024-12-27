@@ -1,3 +1,4 @@
+@canany(['edit-PayrollAllowance','delete-PayrollAllowance'])
 <x-table-action>
     @can('edit-PayrollAllowance')
     <a class="dropdown-item" href="javascript:void(0)" data-url="{{ route('allowances.edit', $id) }}" data-ajax-modal="true"
@@ -13,3 +14,4 @@
     </a>
     @endcan
 </x-table-action>
+@endcanany
