@@ -62,7 +62,6 @@
         </div>
     </div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
     function showAnnouncementDetails(id) {
         const modal = document.getElementById('announcementModal');
@@ -85,8 +84,7 @@
             .then(data => {
                 if (data.html) {
                     modalContent.innerHTML = data.html;
-                    const bootstrapModal = new bootstrap.Modal(modal);
-                    bootstrapModal.show();
+                    $('#announcementModal').modal('show')
                 } else if (data.error) {
                     modalContent.innerHTML = `<p class="text-danger text-center">${data.error}</p>`;
                 }
