@@ -31,6 +31,10 @@ class AppMenuListener
         $menu->add(
             Link::toRoute('dashboard', '<i class="la la-dashboard"></i> <span> ' . __('Dashboard') . '</span>')->setActive(route_is('dashboard'))
         );
+        $menu->addIfCan(
+            'view-announcement',
+            Link::toRoute('announcement.index', '<i class="la la-bullhorn"></i> <span> ' . __('Announcement') . '</span>')->setActive(route_is('announcement.index'))
+        );
         // $activeClass = route_is(["app.chat"]) ? "active" : "";
         // $menu
         //     ->submenu(

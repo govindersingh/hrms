@@ -1,0 +1,68 @@
+<div class="modal-body">
+    <form action="{{ route('announcement.update', $announcement->id) }}" method="post" enctype="multipart/form-data">
+        @csrf
+        @method('PUT')
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <!-- Title -->
+                    <div class="col-md-12">
+                        <div class="input-block mb-3">
+                            <x-form.label>{{ __('Title') }}</x-form.label>
+                            <x-form.input type="text" name="title" value="{{ $announcement->title ?? old('title') }}"/>
+                        </div>
+                    </div>
+
+                    <!-- Description -->
+                    <div class="col-md-12">
+                        <div class="input-block mb-3">
+                            <x-form.label>{{ __('Description') }}</x-form.label>
+                            <textarea name="description" class="form-control" rows="5">{{ $announcement->description ?? old('description') }}</textarea>
+                        </div>
+                    </div>
+
+                    <!-- Start Date -->
+                    <div class="col-md-6">
+                        <div class="input-block mb-3">
+                            <x-form.label>{{ __('Start Date') }}</x-form.label>
+                            <x-form.input type="datetime-local" name="start_date" value="{{ $announcement->start_date ?? old('start_date') }}" />
+                        </div>
+                    </div>
+
+                    <!-- End Date -->
+                    <div class="col-md-6">
+                        <div class="input-block mb-3">
+                            <x-form.label>{{ __('End Date') }}</x-form.label>
+                            <x-form.input type="datetime-local" name="end_date" value="{{ $announcement->end_date ?? old('end_date') }}" />
+                        </div>
+                    </div>
+
+                    <!-- Status -->
+                    <div class="col-md-6">
+                        <x-form.input-block>
+                            <x-form.label>{{ __('Status') }}</x-form.label>
+                            <select name="status" class="form-control select">
+                                <option value="active" @if($announcement->status == 'active') selected @endif>{{ __('Active') }}</option>
+                                <option value="draft" @if($announcement->status == 'draft') selected @endif>{{ __('Draft') }}</option>
+                            </select>
+                        </x-form.input-block>
+                    </div>
+
+                    <!-- Attachment -->
+                    <div class="col-md-6">
+                        <div class="input-block mb-3">
+                            <x-form.label>{{ __('Attachment') }}</x-form.label>
+                            <x-form.input type="file" name="attachment" />
+                        </div>
+                    </div>
+                    <x-form.input type="hidden" name="updated_by" value="{{auth()->user()->id}}" />
+                </div>
+            </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="submit-section mb-2">
+            <x-form.button class="btn btn-primary submit-btn">{{ __('Submit') }}</x-form.button>
+        </div>
+    </form>
+</div>

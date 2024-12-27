@@ -22,6 +22,7 @@ use App\Http\Controllers\Admin\AttendancesController;
 use App\Http\Controllers\Admin\DepartmentsController;
 use App\Http\Controllers\Admin\DesignationsController;
 use App\Http\Controllers\Admin\EmployeeDetailsController;
+use App\Http\Controllers\AnnouncementController;
 
 include __DIR__ . '/auth.php';
 
@@ -33,6 +34,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('profile', [UserProfileController::class, 'index'])->name('profile');
     Route::get('profile/edit', [UserProfileController::class, 'edit'])->name('profile.edit');
     Route::post('profile', [UserProfileController::class, 'update']);
+
+    Route::resource('announcement', AnnouncementController::class);
+    Route::get('/announcement/{id}/details', [AnnouncementController::class, 'details'])->name('announcement.details');
 
     Route::get('documents', [UserProfileController::class, 'documents'])->name('documents');
     Route::post('documents/save', [UserProfileController::class, 'saveDocuments'])->name('documents.save');
