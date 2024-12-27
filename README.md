@@ -204,6 +204,6 @@ In order for the chat app to be working with realtime communication, you'll need
 
 ##### Please note that, this project is under active development so few things might break when you update. You can report any of your issues [here](https://github.com/govindersingh/hrms/issues)
 
-Consider supporting the project if you finds it helpful. Thank you
+### Consider supporting the project if you finds it helpful. Thank you
 - [Paypal](https://www.paypal.me/govindersingh05)
 
