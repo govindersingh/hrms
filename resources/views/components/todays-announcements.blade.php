@@ -84,8 +84,7 @@
             .then(data => {
                 if (data.html) {
                     modalContent.innerHTML = data.html;
-                    const bootstrapModal = new bootstrap.Modal(modal);
-                    bootstrapModal.show();
+                    $('#announcementModal').modal('show')
                 } else if (data.error) {
                     modalContent.innerHTML = `<p class="text-danger text-center">${data.error}</p>`;
                 }
