@@ -8,9 +8,13 @@
 
         <!-- Page Header -->
         <x-breadcrumb>
-
+            <x-slot name="title">{{ __('Welcome') }}
+                {{ !empty(auth()->user()->username) ? auth()->user()->username . ' !' : auth()->user()->firstname . ' !' }}
+            </x-slot>
         </x-breadcrumb>
         <!-- /Page Header -->
+
+        <x-todays-announcements />
 
 
         <livewire:employee-attendance />
