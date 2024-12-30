@@ -1,5 +1,12 @@
 <?php
 
+// $clientIP = $_SERVER['REMOTE_ADDR'];
+// $allowedIps = ['223.178.212.121'];
+// if (!filter_var($clientIP, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4) && !in_array($clientIP, $allowedIps)) {
+//     abort(403, 'Access denied');
+//     exit();
+// }
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\DashboardController;
